@@ -18,3 +18,4 @@ html5-canvas-snow
 <script src="js/canvas-snow.js"></script>
 </html>
 ```
+### 欢迎大家 `fork me` 

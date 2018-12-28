@@ -25,22 +25,47 @@ Canvas.prototype.Init = function(){
 }
 // 生成雪花
 Canvas.prototype.generateSnow = function (){
-    var canvas = this.canvas;
-    var snow = {
-        cX:Math.random()*canvas.width,
-        cY:Math.random()*canvas.height,
-        sX:Math
+    if(this.snows.length<300){
+        var canvas = this.canvas;
+        var snow = {
+            cX:Math.random()*canvas.width,
+            cY:Math.random()*100,
+            cO:1,
+            sX:Math.random()*2-1,
+            sY:Math.floor(Math.random()*2)+1,
+            sO:Math.random()*0.01,
+            size:Math.floor(Math.random()*40+10)
+        }
+        // 添加到天上
+        this.snows.push(snow);
     }
 }
 // 绘制雪花
 Canvas.prototype.drawSnow = function(){
     var ctx = this.ctx;
-    ctx.beginPath();
-    ctx.font = "50px 宋体";
-    ctx.fillStyle = "white";
-    ctx.fillText("❄",50,500);
-    ctx.closePath();
+    var canvas = this.canvas;
+    var snows = this.snows;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(var i=0;i<snows.length;i++){
+        ctx.beginPath();
+        ctx.font = snows[i].size+"px 宋体";
+        ctx.fillStyle = "rgba(255,255,255,"+snows[i].cO+")";
+        ctx.fillText("❄",snows[i].cX,snows[i].cY);
+        ctx.closePath();
+        snows[i].cO -=snows[i].sO;
+        snows[i].cX +=snows[i].sX;
+        snows[i].cY +=snows[i].sY;
+        if(snows[i].cO<=0||snows[i].cY>=canvas.height || snows[i].cX<=0 || snows[i].cX >=canvas.width){
+            snows.splice(i,1);
+            i=i-1;
+        }
+    }
+    
 
 }
 var canvas = new Canvas()
 canvas.Init();
+setInterval(function(){
+    canvas.generateSnow();
+    canvas.drawSnow();
+},30);

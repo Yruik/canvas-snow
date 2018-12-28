@@ -18,4 +18,8 @@ html5-canvas-snow
 <script src="js/canvas-snow.js"></script>
 </html>
 ```
+
+## emm
+### 没有适配浏览器，只有chrome能够达到做好的效果
+
 ### 欢迎大家 `fork me` 

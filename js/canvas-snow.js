@@ -13,7 +13,7 @@ Canvas.prototype.Init = function(){
     document.styleSheets.length || document.head.appendChild(document.createElement('style'));
     document.styleSheets[0].addRule("*","margin:0px;padding:0px;");
     // 创建画布
-    const canvas = document.createElement("canvas");
+    var canvas = document.createElement("canvas");
     // 设置画布样式
     canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
     canvas.height =  window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
@@ -72,7 +72,8 @@ Canvas.prototype.drawSnow = function(){
 // 简单封装开始函数
 Canvas.prototype.Start = function(){
     var e = this;
-    setInterval(function(){
+    clearInterval(e.interval);
+    e.interval =setInterval(function(){
         e.generateSnow();
         e.drawSnow();
     },30);
@@ -82,3 +83,9 @@ var canvas = new Canvas();
 canvas.Init();
 canvas.Start();
 
+// 但窗口发生变化是重新添加画布以适应新的窗口大小
+window.onresize = function(){
+    document.body.removeChild(canvas.canvas);
+    canvas.Init();
+    canvas.Start();
+}

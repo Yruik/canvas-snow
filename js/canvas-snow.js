@@ -27,7 +27,9 @@ Canvas.prototype.Init = function(){
 Canvas.prototype.generateSnow = function (){
     var canvas = this.canvas;
     var snow = {
-        startX=Math.random()*canvas.width;
+        cX:Math.random()*canvas.width,
+        cY:Math.random()*canvas.height,
+        sX:Math
     }
 }
 // 绘制雪花

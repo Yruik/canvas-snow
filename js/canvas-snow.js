@@ -18,6 +18,8 @@ Canvas.prototype.Init = function(){
     canvas.height =  window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     canvas.style.backgroundColor = "grey";
     canvas.style.position = "absolute";
+    canvas.style.left = "0px";
+    canvas.style.top = "0px";
     canvas.style.zIndex = "-1";
     document.body.appendChild(canvas);
     this.canvas = canvas;
@@ -29,7 +31,7 @@ Canvas.prototype.generateSnow = function (){
         var canvas = this.canvas;
         var snow = {
             cX:Math.random()*canvas.width,
-            cY:Math.random()*100,
+            cY:Math.random()*20,
             cO:1,
             sX:Math.random()*2-1,
             sY:Math.floor(Math.random()*2)+1,

@@ -1,4 +1,10 @@
 function Canvas(){
+    if(this.isntance){
+        return this.isntance;
+    }else{
+        this.snows = new Array();
+        return this;
+    }
 }
 //初始化canvas
 Canvas.prototype.Init = function(){
@@ -17,10 +23,22 @@ Canvas.prototype.Init = function(){
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
 }
+// 生成雪花
+Canvas.prototype.generateSnow = function (){
+    var canvas = this.canvas;
+    var snow = {
+        startX=Math.random()*canvas.width;
+    }
+}
+// 绘制雪花
+Canvas.prototype.drawSnow = function(){
+    var ctx = this.ctx;
+    ctx.beginPath();
+    ctx.font = "50px 宋体";
+    ctx.fillStyle = "white";
+    ctx.fillText("❄",50,500);
+    ctx.closePath();
+
+}
 var canvas = new Canvas()
 canvas.Init();
-canvas.ctx.beginPath();
-canvas.ctx.font = "50px 宋体";
-canvas.ctx.fillStyle = "white";
-canvas.ctx.fillText("❄",50,500);
-canvas.ctx.closePath();

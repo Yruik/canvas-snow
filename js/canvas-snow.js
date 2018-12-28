@@ -6,6 +6,7 @@ function Canvas(){
         return this;
     }
 }
+
 //初始化canvas
 Canvas.prototype.Init = function(){
     // 清除默认边距样式
@@ -26,6 +27,7 @@ Canvas.prototype.Init = function(){
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
 }
+
 // 生成雪花
 Canvas.prototype.generateSnow = function (){
     if(this.snows.length<300){
@@ -43,6 +45,7 @@ Canvas.prototype.generateSnow = function (){
         this.snows.push(snow);
     }
 }
+
 // 绘制雪花
 Canvas.prototype.drawSnow = function(){
     var ctx = this.ctx;
@@ -61,14 +64,21 @@ Canvas.prototype.drawSnow = function(){
         if(snows[i].cO<=0||snows[i].cY>=canvas.height || snows[i].cX<=0 || snows[i].cX >=canvas.width){
             snows.splice(i,1);
             i=i-1;
+            this.generateSnow();
         }
-    }
-    
-
+    }  
 }
-var canvas = new Canvas()
+
+// 简单封装开始函数
+Canvas.prototype.Start = function(){
+    var e = this;
+    setInterval(function(){
+        e.generateSnow();
+        e.drawSnow();
+    },30);
+}
+
+var canvas = new Canvas();
 canvas.Init();
-setInterval(function(){
-    canvas.generateSnow();
-    canvas.drawSnow();
-},30);
+canvas.Start();
+
